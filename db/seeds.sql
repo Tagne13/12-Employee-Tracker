@@ -17,4 +17,9 @@ VALUES ("Physical Therapist", 80,000.00, 4),
        ("Physician", 200,000.00, 9),
        ("Registered Nurse", 65,000.00, 7),
 
-INSERT INTO employee (first_name, last_name)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+       ("Jeff", "Montagne", 1, NULL),
+       ("Gabi", "Hill", 5, 4),
+       ("John", "Doe", 4, NULL),
+       ("Jane", "Doe", 3, 4),
+       ("Michael", "Jordan", 2, 4);
