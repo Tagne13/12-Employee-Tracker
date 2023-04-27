@@ -28,12 +28,10 @@
 
   ## [License](#table-of-contents)
 
-  
-    
-    The application is covered under the following license:
+  The application is covered under the following license:
     
     
-    [MIT](https://choosealicense.com/licenses/MIT)
+  [MIT](https://choosealicense.com/licenses/MIT)
     
     
 
