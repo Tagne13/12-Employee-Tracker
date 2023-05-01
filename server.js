@@ -77,7 +77,7 @@ function init () {
 
 // Function to view all departments
 function viewDepartment() {
-  connection.query('SELECT * FROM department', (err, res) => {
+  db.query('SELECT * FROM department', (err, res) => {
     if (err) throw err;
     console.table(res);
     start();
@@ -86,7 +86,7 @@ function viewDepartment() {
 
 // Function to view all roles
 function viewRole() {
-  connection.query('SELECT * FROM role', (err, res) => {
+  db.query('SELECT * FROM role', (err, res) => {
     if (err) throw err;
     console.table(res);
     start();
@@ -95,7 +95,7 @@ function viewRole() {
 
 // Function to view all employees
 function viewEmployee() {
-  connection.query('SELECT * FROM employee', (err, res) => {
+  db.query('SELECT * FROM employee', (err, res) => {
     if (err) throw err;
     console.table(res);
     start();
@@ -111,7 +111,7 @@ function addDepartment() {
       message: 'What is the name of the department?'
     })
     .then((answer) => {
-      connection.query(
+      db.query(
         'INSERT INTO department SET ?',
         {
           name: answer.name
@@ -127,7 +127,7 @@ function addDepartment() {
 
 // Prompt user to add a role to db
 function addRole() {
-  connection.query('SELECT * FROM department', (err, results) => {
+  db.query('SELECT * FROM department', (err, results) => {
     if (err) throw err;
     inquirer
       .prompt([
@@ -154,7 +154,7 @@ function addRole() {
         }
       ])
       .then((answer) => {
-        connection.query(
+        db.query(
           'INSERT INTO role SET ?',
           {
             title: answer.title,
@@ -173,7 +173,7 @@ function addRole() {
 
 // Prompt user to add an employee to db
 function addEmployee() {
-  connection.query('SELECT * FROM role', (err, results) => {
+  db.query('SELECT * FROM role', (err, results) => {
     if (err) throw err;
   })
 }
