@@ -16,15 +16,19 @@
   
   ## [Description](#table-of-contents)
 
-  
+  This application allows users to manage employee data via Node.js, Inquirer, and MySQL. Options include viewing departments, roles, and employees with accompanying info. Users will also be able to add onto exisiting departments, roles, and employees with an additional option to update existing employee information. 
 
   ## [Installation](#table-of-contents)
 
-  
+  To utilize the application, first install Node.js, Inquirer, and MySQL. 
 
   ## [Usage](#table-of-contents)
 
-  
+  Once the application begins, you will be prompted to choose an action after entering "npm start" into the terminal. Select the desired task and follow any subsequent prompts. Once complete, choose the next desired task or choose "No action" to exit the application. Reference the provided video demonstration if necessary. 
+
+  [Video Demonstration] 
+
+  ![Screenshot]()
 
   ## [License](#table-of-contents)
 
@@ -37,11 +41,11 @@
 
   ## [Contributing](#table-of-contents)
 
-  
+  Assistance provided by Andres Long through Web Development Tutors at Team Calendly.
 
   ## [Tests](#table-of-contents)
 
-  
+  N/A
 
   ## [Questions](#table-of-contents)
 
