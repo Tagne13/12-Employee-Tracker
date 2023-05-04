@@ -1,13 +1,6 @@
 // Dependencies
-const express = require('express');
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-// Express middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // Connect to database
 const db = mysql.createConnection(
@@ -15,13 +8,13 @@ const db = mysql.createConnection(
     host: 'localhost',
     user: 'root',
     password: 'hypnotize1',
-    databse: 'employees_db'
+    database: 'employees_db'
   },
   console.log('Connected to the employees_db database.')
 );
 
 // Prompt user to select desired action
-function init () {
+function start () {
   inquirer
     .prompt({
       type: 'list',
@@ -143,7 +136,7 @@ function addRole() {
         },
         {
           name: 'department',
-          type: 'input',
+          type: 'list',
           message: 'Which department does the role belong to?',
           choices: results.map((department) => {
             return {
@@ -178,13 +171,4 @@ function addEmployee() {
   })
 }
 
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end()
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-});
-
-init();
+start()
