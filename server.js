@@ -168,7 +168,58 @@ function addRole() {
 function addEmployee() {
   db.query('SELECT * FROM role', (err, results) => {
     if (err) throw err;
-  })
+    inquirer
+      .prompt([
+        {
+          name: 'first_name',
+          type: 'input',
+          message: 'What is the first name of the employee?'
+        },
+        {
+          name: 'last_name',
+          type: 'input',
+          message: 'What is the last name of the employee?'
+        },
+        {
+          name: 'role',
+          type: 'list',
+          message: 'What is the role of the employee?',
+          choices: results.map((role) => {
+            return {
+              name: role.title,
+              value: role.id
+            };
+          })
+        },
+        {
+          name: 'manager',
+          type: 'list',
+          choices: results.map((employee) => {
+            return {
+              name: employee.first_name,
+              name: employee.last_name,
+              value: employee.id
+            };
+          })
+        }
+      ])
+      .then((answer) => {
+        db.query(
+          'INSERT INTO employee SET ?',
+          {
+            first_name: answer.first_name,
+            last_name: answer.last_name,
+            role_id: answer.role,
+            manager_id: answer.employee.first_name.last_name.employee.id
+          },
+          (err) => {
+            if (err) throw err;
+            console.log('Employee added successfully!');
+            start();
+          }
+        );
+      });
+  });
 }
 
 start()
