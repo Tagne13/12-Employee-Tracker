@@ -20,7 +20,7 @@
 
   ## [Installation](#table-of-contents)
 
-  To utilize the application, first install Node.js, Inquirer, and MySQL. 
+  To utilize the application, first install Node.js, Inquirer, and MySQL. Then fork the project repository to your local machine. Use the command "npm i" in the command line. Then navigate to the db and enter "mysql -u root -p" into the command line. Enter your personal MySQL password. Next, enter "SOURCE schema.sql" and then "SOURCE seeds.sql" to create and seed the employee database in MySQL. 
 
   ## [Usage](#table-of-contents)
 
@@ -28,7 +28,7 @@
 
   [Video Demonstration] 
 
-  ![Screenshot]()
+  ![Screenshot](assets/Screenshot.png)
 
   ## [License](#table-of-contents)
 
