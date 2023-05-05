@@ -210,7 +210,7 @@ function addEmployee() {
             first_name: answer.first_name,
             last_name: answer.last_name,
             role_id: answer.role,
-            manager_id: answer.employee.first_name.last_name.employee.id
+            manager_id: answer.manager_id
           },
           (err) => {
             if (err) throw err;
@@ -220,6 +220,10 @@ function addEmployee() {
         );
       });
   });
+}
+
+function updateEmployee() {
+  
 }
 
 start()
