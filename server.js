@@ -222,8 +222,47 @@ function addEmployee() {
   });
 }
 
+// Prompt user to update an employee's role in the db
 function updateEmployee() {
-  
+  db.query('SELECT * FROM employee', (err, results) => {
+    if (err) throw err;
+    inquirer
+      .prompt([
+        {
+          name: 'employeeId',
+          type: 'input',
+          message: 'What is the ID number of the employee?',
+        },
+        {
+          name: 'newRole',
+          type: 'list',
+          message: 'What is the new role of the employee?',
+          choices: results.map((role) => {
+            return {
+              name: role.title,
+              value: role.id
+            };
+          })
+        }
+      ])
+      .then((answer) => {
+        const employeeId = answer.employeeId;
+        const newRole = answer.newRole;
+        updateEmployeeRole(employeeId, newRole);
+      });
+  });
+}
+
+function updateEmployeeRole(employeeId, newRole) {
+  db.query(
+    'UPDATE employee SET role = ? WHERE id = ?', 
+    [newRole, employeeId],
+    (err) => {
+      if (err) throw err;
+      console.log('Employee updated.');
+      start();
+    }
+  );
 }
 
 start()
