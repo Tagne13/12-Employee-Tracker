@@ -229,12 +229,12 @@ function updateEmployee() {
     inquirer
       .prompt([
         {
-          name: 'employeeId',
+          name: 'id',
           type: 'input',
           message: 'What is the ID number of the employee?',
         },
         {
-          name: 'newRole',
+          name: 'role',
           type: 'list',
           message: 'What is the new role of the employee?',
           choices: results.map((role) => {
@@ -246,23 +246,38 @@ function updateEmployee() {
         }
       ])
       .then((answer) => {
-        const employeeId = answer.employeeId;
-        const newRole = answer.newRole;
-        updateEmployeeRole(employeeId, newRole);
+        db.query(
+          'INSERT INTO employee SET ?',
+          {
+            id: answer.id,
+            role_id: answer.role
+          },
+          (err) => {
+            if (err) throw err;
+            console.log('Employee successfully updated!');
+            start();
+          }
+        );
       });
-  });
-}
+    });
+  }
+//         const employeeId = answer.employeeId;
+//         const newRole = answer.newRole;
+//         updateEmployeeRole(employeeId, newRole);
+//       });
+//   });
+// }
 
-function updateEmployeeRole(employeeId, newRole) {
-  db.query(
-    'UPDATE employee SET role = ? WHERE id = ?', 
-    [newRole, employeeId],
-    (err) => {
-      if (err) throw err;
-      console.log('Employee updated.');
-      start();
-    }
-  );
-}
+// function updateEmployeeRole(employeeId, newRole) {
+//   db.query(
+//     'UPDATE employee SET role = ? WHERE id = ?', 
+//     [newRole, employeeId],
+//     (err) => {
+//       if (err) throw err;
+//       console.log('Employee updated.');
+//       start();
+//     }
+//   );
+// }
 
-start()
+start();
