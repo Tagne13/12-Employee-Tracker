@@ -14,7 +14,7 @@ const db = mysql.createConnection(
 );
 
 // Prompt user to select desired action
-function start () {
+function start() {
   inquirer
     .prompt({
       type: 'list',
@@ -222,62 +222,61 @@ function addEmployee() {
   });
 }
 
-// Prompt user to update an employee's role in the db
-function updateEmployee() {
-  db.query('SELECT * FROM employee', (err, results) => {
-    if (err) throw err;
-    inquirer
-      .prompt([
-        {
-          name: 'id',
-          type: 'input',
-          message: 'What is the ID number of the employee?',
-        },
-        {
-          name: 'role',
-          type: 'list',
-          message: 'What is the new role of the employee?',
-          choices: results.map((role) => {
-            return {
-              name: role.title,
-              value: role.id
-            };
-          })
-        }
-      ])
-      .then((answer) => {
-        db.query(
-          'INSERT INTO employee SET ?',
-          {
-            id: answer.id,
-            role_id: answer.role
-          },
-          (err) => {
-            if (err) throw err;
-            console.log('Employee successfully updated!');
-            start();
-          }
-        );
-      });
-    });
-  }
-//         const employeeId = answer.employeeId;
-//         const newRole = answer.newRole;
-//         updateEmployeeRole(employeeId, newRole);
-//       });
-//   });
-// }
+function loadEmployees() {
+  return db.promise().query("SELECT * FROM employee")
+}
 
-// function updateEmployeeRole(employeeId, newRole) {
-//   db.query(
-//     'UPDATE employee SET role = ? WHERE id = ?', 
-//     [newRole, employeeId],
-//     (err) => {
-//       if (err) throw err;
-//       console.log('Employee updated.');
-//       start();
-//     }
-//   );
-// }
+function loadRoles() {
+  return db.promise().query("SELECT * FROM role")
+}
+
+// Prompt user to update an employee's role in the db
+async function updateEmployee() {
+  const employeeData = await loadEmployees()
+
+  const [rows] = await loadRoles();
+
+  const employeeOptions = employeeData[0].map((employee) => ({
+    name: employee.first_name + " " + employee.last_name,
+    value: employee.id
+  }))
+  
+  const roleOptions = rows.map((role) => ({
+    name: role.title,
+    value: role.id
+  }))
+
+  inquirer
+    .prompt([
+      {
+        name: 'id',
+        type: 'list',
+        message: 'What is the ID number of the employee?',
+        choices: employeeOptions
+      },
+      {
+        name: 'role',
+        type: 'list',
+        message: 'What is the new role of the employee?',
+        choices: roleOptions
+      }
+    ])
+    .then((answer) => {
+      console.log(answer)
+      db.query(
+        'UPDATE employee SET role_id = ? WHERE id = ?',
+        [
+          answer.role,
+          answer.id
+        ],
+        (err) => {
+          if (err) throw err;
+          console.log('Employee successfully updated!');
+          start();
+        }
+      );
+    });
+
+}
 
 start();
