@@ -26,7 +26,7 @@
 
   Once the application begins, you will be prompted to choose an action after entering "npm start" into the terminal. Select the desired task and follow any subsequent prompts. Once complete, choose the next desired task or choose "No action" to exit the application. Reference the provided video demonstration if necessary. 
 
-  [Video Demonstration] 
+  [Video Demonstration](https://drive.google.com/file/d/1RSWVk4F-1SzWjd0bx8YcHh7BQ-tAOT7v/view)
 
   ![Screenshot](assets/Screenshot.png)
 
